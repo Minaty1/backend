@@ -26,7 +26,7 @@ class AIService {
         {
           model: GROQ_CHAT_MODEL,
           messages: [
-            { role: 'system', content: 'You are JARVIS, a helpful AI assistant.' },
+            { role: 'system', content: 'You are JARVIS, a helpful AI assistant. Respond concisely and professionally.' },
             { role: 'user', content: message }
           ],
           max_tokens: 1024,
@@ -48,16 +48,28 @@ class AIService {
       }
     } catch (err) {
       console.error('AI Chat Error:', err.message)
-      throw new Error('Failed to get AI response')
+      return {
+        response: "Sir, I am currently unable to access the main neural network due to an authentication error with the AI provider. Switching to offline mode.",
+        userId,
+        timestamp: new Date().toISOString(),
+        source: 'fallback'
+      }
     }
   }
 
   async generateImage(prompt) {
-    return {
-      imageUrl: null,
-      message: 'Image generation is currently disabled',
-      prompt,
-      source: 'mock'
+    try {
+      // Using Pollinations.ai for free, fast, keyless image generation
+      const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true`;
+      return {
+        imageUrl,
+        message: 'Here is the image you requested, sir.',
+        prompt,
+        source: 'pollinations'
+      };
+    } catch (err) {
+      console.error('Image Generation Error:', err.message);
+      throw new Error('Failed to generate image');
     }
   }
 
