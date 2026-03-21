@@ -34,9 +34,10 @@ app.use('/api/news', newsRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/system', systemRoutes);
 
-// Serve frontend apps (mobile/desktop) as static assets
+// Serve frontend apps (mobile/desktop/unified) as static assets
 app.use('/frontend-mobile', express.static(path.join(__dirname, '../../frontend-mobile')));
 app.use('/frontend-desktop', express.static(path.join(__dirname, '../../frontend-desktop')));
+app.use('/frontend', express.static(path.join(__dirname, '../../frontend')));
 
 // Health check and root endpoint removed per request
 
