@@ -2,10 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const weatherRoutes = require('../routes/weather');
-const newsRoutes = require('../routes/news');
-const aiRoutes = require('../routes/ai');
-const systemRoutes = require('../routes/system');
+const weatherRoutes = require('./routes/weather');
+const newsRoutes = require('./routes/news');
+const aiRoutes = require('./routes/ai');
+const systemRoutes = require('./routes/system');
 
 // Setup SQLite DB
 const db = require('./db/database');
